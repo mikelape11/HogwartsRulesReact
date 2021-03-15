@@ -1,0 +1,12 @@
+body{
+    background-image: url("../media/fondoAzul.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.logo{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
