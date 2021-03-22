@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router";
-import { Layout, Menu } from 'antd';
-import { FileSyncOutlined, UserOutlined, FileAddOutlined,FileExcelOutlined,UserAddOutlined,UserDeleteOutlined,UserSwitchOutlined,EuroOutlined,PlusSquareOutlined,MinusSquareOutlined,QuestionCircleOutlined} from '@ant-design/icons';
+import { Button, Layout, Menu,  } from 'antd';
+import IconButton from '@material-ui/core/IconButton';
+import ToggleOffIcon from '@material-ui/icons/ToggleOff';
+import { RollbackOutlined,SettingOutlined,CaretLeftOutlined,HomeOutlined,FileSyncOutlined, UserOutlined, FileAddOutlined,FileExcelOutlined,UserAddOutlined,UserDeleteOutlined,UserSwitchOutlined,EuroOutlined,PlusSquareOutlined,MinusSquareOutlined,QuestionCircleOutlined} from '@ant-design/icons';
 import "./style/style.css";
 import Icon from "./media/Logo1.png";
 import Avatar from "./media/Avatar.png";
@@ -56,11 +58,31 @@ const Home = () => {
             >
             Content
             </Content>
-            
         </Layout>
         <Footer>
-        <img src={Avatar} height={100}></img>
-        <h1>BelakoOMG</h1>
+        <input
+                accept="image/*"
+                id="contained-button-file"
+                multiple
+                name="image"
+                type="file"
+              />
+              <label htmlFor="contained-button-file">
+                <IconButton component="span" id="h1nombre">
+                  <img src={Avatar} id="logo"></img>
+                </IconButton>
+              </label>
+            <h1 id="h1nombre">BelakoOMG</h1>
+            <br></br>
+            <Button type="primary" shape="round" icon={<HomeOutlined />} className="botones">Inicio</Button><br></br>
+            <Button type="primary" shape="round" icon={<RollbackOutlined />} className="botones">Cambio de cuenta</Button><br></br>
+            <Button type="primary" shape="round" icon={<SettingOutlined />} className="botones">Configuración</Button><br></br>
+            <Button type="primary" shape="round" icon={<CaretLeftOutlined />} className="botones">Log Out</Button><br></br>
+            <br></br>
+            <div id="darklight">
+                <h1>Modo Oscuro</h1>
+                <ToggleOffIcon></ToggleOffIcon>
+            </div>
         </Footer>
         </Layout>
     </Layout>

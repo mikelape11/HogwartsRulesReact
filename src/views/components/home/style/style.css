@@ -36,3 +36,24 @@
     display:flex;
     justify-content: center;
 }
+#contained-button-file{
+    visibility: hidden;
+    width: 0px;
+    height: 0px;
+}
+#logo{
+    height: 100px;
+    width: 100px;
+}
+.botones{
+    margin-top: 10%;
+    width: 200px;
+    height: 35px;
+}
+#h1nombre{
+    display: flex;
+    justify-content: center;
+}
+#darklight{
+    margin-top: 105%;
+}
