@@ -14,6 +14,14 @@ const InsertarPregunta = () => {
     setComponentSize(size);
   };
 
+  const [respuesta1, setRespuesta1] = useState("");
+
+  const [respuesta2, setRespuesta2] = useState("");
+
+  const [respuesta3, setRespuesta3] = useState("");
+
+  const [respuesta4, setRespuesta4] = useState("");
+
   const [pregunta, setPregunta] = useState("");
 
   const [fileList, setFileList] = useState<any>([]);
@@ -53,15 +61,39 @@ const InsertarPregunta = () => {
   };
 
   function GuardarPregunta() {
+    console.log(fileList);
     axios({
       method: "POST",
       url: "http://localhost:8080/añadirTest",
       data: {
         pregunta: pregunta,
-        // respuesta1:
-        // respuesta2:
-        // respuesta3:
-        // respuesta4:
+        numPregunta: 9,
+        respuestas: [
+          {
+            numRespuesta: 1,
+            respuesta: respuesta1,
+            imagen: fileList,
+            puntos: 0,
+          },
+          {
+            numRespuesta: 2,
+            respuesta: respuesta2,
+            imagen: fileList2,
+            puntos: 0,
+          },
+          {
+            numRespuesta: 3,
+            respuesta: respuesta3,
+            imagen: fileList3,
+            puntos: 0,
+          },
+          {
+            numRespuesta: 4,
+            respuesta: respuesta4,
+            imagen: fileList4,
+            puntos: 0,
+          },
+        ],
       },
       headers: { "Access-Control-Allow-Origin": "*" },
     });
@@ -77,10 +109,10 @@ const InsertarPregunta = () => {
       size={componentSize as SizeType}
     >
       <Form.Item label="Pregunta: ">
-        <Input />
+        <Input onChange={(valor) => setPregunta(valor.target.value)} />
       </Form.Item>
       <Form.Item label="Respuesta 1:">
-        <Input />
+        <Input onChange={(valor) => setRespuesta1(valor.target.value)} />
       </Form.Item>
       <div className="imageUplo">
         <ImgCrop rotate>
@@ -96,7 +128,7 @@ const InsertarPregunta = () => {
         </ImgCrop>
       </div>
       <Form.Item label="Respuesta 2:">
-        <Input />
+        <Input onChange={(valor) => setRespuesta2(valor.target.value)} />
       </Form.Item>
       <div className="imageUplo">
         <ImgCrop rotate>
@@ -113,7 +145,7 @@ const InsertarPregunta = () => {
         </ImgCrop>
       </div>
       <Form.Item label="Respuesta 3:">
-        <Input />
+        <Input onChange={(valor) => setRespuesta3(valor.target.value)} />
       </Form.Item>
       <div className="imageUplo">
         <ImgCrop rotate>
@@ -130,7 +162,7 @@ const InsertarPregunta = () => {
         </ImgCrop>
       </div>
       <Form.Item label="Respuesta 4:">
-        <Input />
+        <Input onChange={(valor) => setRespuesta4(valor.target.value)} />
       </Form.Item>
       <div className="imageUplo">
         <ImgCrop rotate>
