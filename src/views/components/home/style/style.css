@@ -1,59 +1,60 @@
 #components-layout-demo-top-side-2 .logo {
-    float: left;
-    width: 120px;
-    height: 31px;
-    margin: 16px 24px 16px 0;
-    background: rgba(255, 255, 255, 0.3);
+  float: left;
+  width: 120px;
+  height: 31px;
+  margin: 16px 24px 16px 0;
+  background: rgba(255, 255, 255, 0.3);
 }
-  
-  .ant-row-rtl #components-layout-demo-top-side-2 .logo {
-    float: right;
-    margin: 16px 0 16px 24px;
+
+.ant-row-rtl #components-layout-demo-top-side-2 .logo {
+  float: right;
+  margin: 16px 0 16px 24px;
 }
-  
-  .site-layout-background {
-    background: #fff;
-    margin-top:1%;
+
+.site-layout-background {
+  background: #fff;
+  margin-top: 1%;
 }
-  body{
-    background-image: url("");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+body {
+  background-image: url("");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
-#todo{
-    height: 100vh;
+#todo {
+  height: 100vh;
 }
-.content{
-    height: 75vh;
-    margin-top:1%;
+.content {
+  height: 90vh;
+  margin-top: 1%;
 }
-.header{
-    background-color: #fff;
-    height: 1%;
+.header {
+  background-color: #fff;
+  height: 100px;
 }
-#icono{
-    display:flex;
-    justify-content: center;
+
+#icono {
+  display: flex;
+  justify-content: center;
 }
-#contained-button-file{
-    visibility: hidden;
-    width: 0px;
-    height: 0px;
+#contained-button-file {
+  visibility: hidden;
+  width: 0px;
+  height: 0px;
 }
-#logo{
-    height: 100px;
-    width: 100px;
+#logo {
+  height: 100px;
+  width: 100px;
 }
-.botones{
-    margin-top: 10%;
-    width: 200px;
-    height: 35px;
+.botones {
+  margin-top: 10%;
+  width: 200px;
+  height: 35px;
 }
-#h1nombre{
-    display: flex;
-    justify-content: center;
+#h1nombre {
+  display: flex;
+  justify-content: center;
 }
-#darklight{
-    margin-top: 105%;
+#darklight {
+  margin-top: 105%;
 }

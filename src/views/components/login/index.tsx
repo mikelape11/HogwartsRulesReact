@@ -74,7 +74,7 @@ const Demo = () => {
   async function opacidadFomu() {
     for (let i = 0; i < 11; i++) {
       setOpacidad(i / 10);
-      await delay(70);
+      await delay(100);
     }
   }
 
