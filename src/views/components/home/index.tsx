@@ -24,6 +24,7 @@ import "./style/style.css";
 import Icon from "./media/Logo1.png";
 import Avatar from "./media/Avatar.png";
 import InsertarPregunta from "./crud/Test/InsertarPregunta";
+import EditarPregunta from "./crud/Test/EditarPregunta";
 
 //funcion que conecte con la api
 
@@ -152,6 +153,7 @@ const Home = () => {
             }}
           >
             {valorMenu == 10 ? <InsertarPregunta></InsertarPregunta> : ""}
+            {valorMenu == 11 ? <EditarPregunta></EditarPregunta> : ""}
           </Content>
         </Layout>
         <Footer className="footer">

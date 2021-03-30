@@ -37,7 +37,6 @@ const Demo = () => {
       transform: "scale(0.9)",
       freq: "0.0175, 0.0",
     },
-    // to: { scale: 150, opacity: 1, transform: "scale(1)", freq: "0.0, 0.0" },
     config: { duration: 3000 },
   });
 
