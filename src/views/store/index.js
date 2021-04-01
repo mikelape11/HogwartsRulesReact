@@ -1,8 +1,7 @@
-  
-import {createStore, combineReducers} from "redux";
-import {loadauth} from "./reducers";
+import { createStore, combineReducers } from "redux";
+import loadauth from "./reducers/auth";
 const reducers = combineReducers({
-    loadauth
+  loadauth,
 });
 
 export default createStore(reducers);

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Form, Input, Button, Upload, message, Menu, Dropdown } from "antd";
-import { UploadOutlined, InboxOutlined } from "@ant-design/icons";
+import { DownOutlined, UserOutlined } from "@ant-design/icons";
 import ImgCrop from "antd-img-crop";
 import "./style.css";
 import axios from "axios";
@@ -170,7 +170,7 @@ const EditarPregunta = () => {
       onValuesChange={onFormLayoutChange}
       size={componentSize as SizeType}
     >
-      <Dropdown overlay={menu} trigger={["click"]}>
+      {/* <Dropdown overlay={menu} trigger={["click"]}>
         <a
           className="ant-dropdown-link"
           onClick={(e) => {
@@ -179,6 +179,12 @@ const EditarPregunta = () => {
         >
           Preguntas
         </a>
+      </Dropdown> */}
+
+      <Dropdown overlay={menu} trigger={["click"]}>
+        <Button>
+          Preguntas <DownOutlined />
+        </Button>
       </Dropdown>
 
       <Form.Item label="Pregunta: ">

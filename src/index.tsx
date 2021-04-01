@@ -6,18 +6,21 @@ import Demo from "./views/components/login/index";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { Redirect } from "react-router";
 import Home from "./views/components/home/index";
-import PrivateRoute from '../src/views/services/PrivateRoute';
-import useAuth from './views/hooks/useAuth';
-const [auth] = useAuth();
+import PrivateRoute from "../src/views/services/PrivateRoute";
+import { Provider } from "react-redux";
+import createStore from "./views/store/index";
+
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Switch>
-        <Redirect exact from="/" to="/login" />
-        <Route path="/login" component={Demo} />
-        <PrivateRoute path ="/home" isAuthenticated={auth} component={Home}/>
-      </Switch>
-    </BrowserRouter>
+    <Provider store={createStore}>
+      <BrowserRouter>
+        <Switch>
+          <Redirect exact from="/" to="/login" />
+          <Route path="/login" component={Demo} />
+          <PrivateRoute path="/home" component={Home} />
+        </Switch>
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );

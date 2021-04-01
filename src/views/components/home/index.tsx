@@ -25,6 +25,7 @@ import Icon from "./media/Logo1.png";
 import Avatar from "./media/Avatar.png";
 import InsertarPregunta from "./crud/Test/InsertarPregunta";
 import EditarPregunta from "./crud/Test/EditarPregunta";
+import EliminarPregunta from "./crud/Test/EliminarPregunta";
 
 //funcion que conecte con la api
 
@@ -154,6 +155,7 @@ const Home = () => {
           >
             {valorMenu == 10 ? <InsertarPregunta></InsertarPregunta> : ""}
             {valorMenu == 11 ? <EditarPregunta></EditarPregunta> : ""}
+            {valorMenu == 12 ? <EliminarPregunta></EliminarPregunta> : ""}
           </Content>
         </Layout>
         <Footer className="footer">
