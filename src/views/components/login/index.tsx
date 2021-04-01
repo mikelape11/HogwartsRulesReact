@@ -8,6 +8,8 @@ import Logo3 from "./media/Logo3.png";
 import axios from "axios";
 import { useSpring, animated } from "react-spring";
 import ruta from "./style/logoInicio";
+import useAuth from '../../hooks/useAuth';
+const [setAuth] = useAuth();
 const delay = require("delay");
 //funcion que conecte con la api
 const layout = {
@@ -51,7 +53,7 @@ const Demo = () => {
       },
       headers: { "Access-Control-Allow-Origin": "*" },
     }).then((response: any) => {
-      console.log(response.data);
+        setAuth(response.data);
       if (response.data == true) {
         history.push("/home");
       }
