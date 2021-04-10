@@ -26,6 +26,8 @@ import Avatar from "./media/Avatar.png";
 import InsertarPregunta from "./crud/Test/InsertarPregunta";
 import EditarPregunta from "./crud/Test/EditarPregunta";
 import EliminarPregunta from "./crud/Test/EliminarPregunta";
+import EditarUsuario from "./crud/Usuario/EditarUsuario";
+import EliminarUsuario from "./crud/Usuario/EliminarUsuario";
 
 //funcion que conecte con la api
 
@@ -73,13 +75,6 @@ const Home = () => {
               </Menu.Item>
             </SubMenu>
             <SubMenu key="sub2" icon={<UserOutlined />} title="Usuarios">
-              <Menu.Item
-                key="4"
-                onClick={() => setValorMenu(4)}
-                icon={<UserAddOutlined />}
-              >
-                Crear
-              </Menu.Item>
               <Menu.Item
                 key="5"
                 onClick={() => setValorMenu(5)}
@@ -153,6 +148,8 @@ const Home = () => {
               height: "90vh",
             }}
           >
+            {valorMenu == 5 ? <EditarUsuario></EditarUsuario> : ""}
+            {valorMenu == 6 ? <EliminarUsuario></EliminarUsuario> : ""}
             {valorMenu == 10 ? <InsertarPregunta></InsertarPregunta> : ""}
             {valorMenu == 11 ? <EditarPregunta></EditarPregunta> : ""}
             {valorMenu == 12 ? <EliminarPregunta></EliminarPregunta> : ""}

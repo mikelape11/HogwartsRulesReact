@@ -12,15 +12,15 @@ import createStore from "./views/store/index";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={createStore}>
-      <BrowserRouter>
-        <Switch>
-          <Redirect exact from="/" to="/login" />
-          <Route path="/login" component={Demo} />
-          <PrivateRoute path="/home" component={Home} />
-        </Switch>
-      </BrowserRouter>
-    </Provider>
+    {/* <Provider store={createStore}> */}
+    <BrowserRouter>
+      <Switch>
+        <Redirect exact from="/" to="/login" />
+        <Route path="/login" component={Demo} />
+        <Route path="/home" component={Home} />
+      </Switch>
+    </BrowserRouter>
+    {/* </Provider> */}
   </React.StrictMode>,
   document.getElementById("root")
 );

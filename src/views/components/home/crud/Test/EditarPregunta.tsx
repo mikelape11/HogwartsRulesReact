@@ -84,9 +84,9 @@ const EditarPregunta = () => {
     //imgWindow.document.write(image.outerHTML);
   };
 
-  function GuardarPregunta() {
+  async function GuardarPregunta() {
     console.log(fileList);
-    axios({
+    await axios({
       method: "POST",
       url: "http://localhost:8080/editarTest",
       data: {
@@ -122,6 +122,17 @@ const EditarPregunta = () => {
       },
       headers: { "Access-Control-Allow-Origin": "*" },
     });
+    setFileList("");
+    setFileList2("");
+    setFileList3("");
+    setFileList4("");
+    setNumPreg(0);
+    setPregunta("");
+    setRespuesta1("");
+    setRespuesta2("");
+    setRespuesta3("");
+    setRespuesta4("");
+    setIdActualizar("");
   }
 
   async function conseguirPreguntas() {

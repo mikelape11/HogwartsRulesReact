@@ -7,7 +7,7 @@ import "./style.css";
 import axios from "axios";
 type SizeType = Parameters<typeof Form>[0]["size"];
 
-const EliminarPregunta = () => {
+const EliminarUsuario = () => {
   const [componentSize, setComponentSize] = useState<SizeType | "default">(
     "default"
   );
@@ -15,9 +15,9 @@ const EliminarPregunta = () => {
     setComponentSize(size);
   };
 
-  const listaPreguntas = [] as any;
+  const listaUsuarios = [] as any;
 
-  const [pregunta, setPregunta] = useState("");
+  const [usuario, setUsuario] = useState("");
 
   const [idSeleccionada, setIdSeleccionada] = useState<any>(0);
 
@@ -36,7 +36,7 @@ const EliminarPregunta = () => {
             escribirInputs(dato.key);
           }}
         >
-          {parametro["pregunta"]}
+          {parametro["usuario"]}
         </Menu.Item>
       );
     });
@@ -45,21 +45,21 @@ const EliminarPregunta = () => {
   }
 
   function escribirInputs(numero) {
-    var lista = listaPreguntas[0][numero];
-    setPregunta(lista["pregunta"]);
+    var lista = listaUsuarios[0][numero];
+    setUsuario(lista["usuario"]);
   }
 
   async function Eliminar() {
     console.log(idSeleccionada);
     await axios({
       method: "DELETE",
-      url: "http://localhost:8080/eliminarTest",
+      url: "http://localhost:8080/eliminarUsuario",
       data: {
         _id: idSeleccionada,
       },
       headers: { "Access-Control-Allow-Origin": "*" },
     });
-    setPregunta("");
+    setUsuario("");
     conseguirPreguntas();
   }
 
@@ -67,12 +67,11 @@ const EliminarPregunta = () => {
     let lista = [] as any;
     await axios({
       method: "GET",
-      url: "http://localhost:8080/getPreguntasRespuestas",
+      url: "http://localhost:8080/todos",
       headers: { "Access-Control-Allow-Origin": "*" },
     }).then((response: any) => {
-      listaPreguntas.push(response.data);
+      listaUsuarios.push(response.data);
       lista.push(response.data);
-      console.log(listaPreguntas);
     });
     hacerMenu(lista);
   }
@@ -92,15 +91,15 @@ const EliminarPregunta = () => {
     >
       <Dropdown overlay={menu} trigger={["click"]}>
         <Button>
-          Preguntas <DownOutlined />
+          Usuarios <DownOutlined />
         </Button>
       </Dropdown>
 
-      <Form.Item label="Pregunta: ">
+      <Form.Item label="Usuario: ">
         <Input
           readOnly={true}
-          value={pregunta}
-          onChange={(valor) => setPregunta(valor.target.value)}
+          value={usuario}
+          onChange={(valor) => setUsuario(valor.target.value)}
         />
       </Form.Item>
 
@@ -117,4 +116,4 @@ const EliminarPregunta = () => {
   );
 };
 
-export default EliminarPregunta;
+export default EliminarUsuario;
