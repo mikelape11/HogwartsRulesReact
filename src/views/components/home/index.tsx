@@ -28,7 +28,12 @@ import EditarPregunta from "./crud/Test/EditarPregunta";
 import EliminarPregunta from "./crud/Test/EliminarPregunta";
 import EditarUsuario from "./crud/Usuario/EditarUsuario";
 import EliminarUsuario from "./crud/Usuario/EliminarUsuario";
-
+import EliminarVarita from "./crud/TestVarita/EliminarVarita";
+import EditarVarita from "./crud/TestVarita/EditarVarita";
+import InsertarVarita from "./crud/TestVarita/InsertarVarita";
+import EliminarPatronus from "./crud/TestPatronus/EliminarPatronus";
+import EditarPatronus from "./crud/TestPatronus/EditarPatronus";
+import InsertarPatronus from "./crud/TestPatronus/InsertarPatronus";
 //funcion que conecte con la api
 
 const Home = () => {
@@ -136,6 +141,52 @@ const Home = () => {
                 Eliminar
               </Menu.Item>
             </SubMenu>
+            <SubMenu key="sub5" icon={<EuroOutlined />} title="TestVarita">
+              <Menu.Item
+                key="13"
+                onClick={() => setValorMenu(13)}
+                icon={<PlusSquareOutlined />}
+              >
+                Crear
+              </Menu.Item>
+              <Menu.Item
+                key="14"
+                onClick={() => setValorMenu(14)}
+                icon={<QuestionCircleOutlined />}
+              >
+                Editar
+              </Menu.Item>
+              <Menu.Item
+                key="15"
+                onClick={() => setValorMenu(15)}
+                icon={<MinusSquareOutlined />}
+              >
+                Eliminar
+              </Menu.Item>
+            </SubMenu>
+            <SubMenu key="sub6" icon={<EuroOutlined />} title="TestPatronus">
+              <Menu.Item
+                key="16"
+                onClick={() => setValorMenu(16)}
+                icon={<PlusSquareOutlined />}
+              >
+                Crear
+              </Menu.Item>
+              <Menu.Item
+                key="17"
+                onClick={() => setValorMenu(17)}
+                icon={<QuestionCircleOutlined />}
+              >
+                Editar
+              </Menu.Item>
+              <Menu.Item
+                key="18"
+                onClick={() => setValorMenu(18)}
+                icon={<MinusSquareOutlined />}
+              >
+                Eliminar
+              </Menu.Item>
+            </SubMenu>
           </Menu>
         </Sider>
         <Layout style={{ padding: "0 24px 24px" }} className="content">
@@ -153,6 +204,13 @@ const Home = () => {
             {valorMenu == 10 ? <InsertarPregunta></InsertarPregunta> : ""}
             {valorMenu == 11 ? <EditarPregunta></EditarPregunta> : ""}
             {valorMenu == 12 ? <EliminarPregunta></EliminarPregunta> : ""}
+            {valorMenu == 13 ? <InsertarVarita></InsertarVarita> : ""}
+            {valorMenu == 14 ? <EditarVarita></EditarVarita> : ""}
+            {valorMenu == 15 ? <EliminarVarita></EliminarVarita> : ""}
+            {valorMenu == 16 ? <InsertarPatronus></InsertarPatronus> : ""}
+            {valorMenu == 17 ? <EditarPatronus></EditarPatronus> : ""}
+            {valorMenu == 18 ? <EliminarPatronus></EliminarPatronus> : ""}
+
           </Content>
         </Layout>
         <Footer className="footer">

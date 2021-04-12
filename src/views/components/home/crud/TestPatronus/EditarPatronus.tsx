@@ -6,7 +6,7 @@ import "./style.css";
 import axios from "axios";
 type SizeType = Parameters<typeof Form>[0]["size"];
 
-const EditarPregunta = () => {
+const EditarPatronus = () => {
   const [componentSize, setComponentSize] = useState<SizeType | "default">(
     "default"
   );
@@ -88,7 +88,7 @@ const EditarPregunta = () => {
     console.log(fileList);
     await axios({
       method: "POST",
-      url: "http://localhost:8080/editarTest",
+      url: "http://localhost:8080/editarPatronus",
       data: {
         _id: idActualizar,
         pregunta: pregunta,
@@ -129,7 +129,7 @@ const EditarPregunta = () => {
     let lista = [] as any;
     await axios({
       method: "GET",
-      url: "http://localhost:8080/getPreguntasRespuestas",
+      url: "http://localhost:8080/getPreguntasRespuestasPatronus",
       headers: { "Access-Control-Allow-Origin": "*" },
     }).then((response: any) => {
       listaPreguntas.push(response.data);
@@ -290,4 +290,4 @@ const EditarPregunta = () => {
   );
 };
 
-export default EditarPregunta;
+export default EditarPatronus;

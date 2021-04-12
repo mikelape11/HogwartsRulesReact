@@ -1,25 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { Form, Input, Button, Upload, message, Menu, Dropdown } from "antd";
-import { DownOutlined, UserOutlined } from "@ant-design/icons";
+import React, { useState } from "react";
+import { Form, Input, Button, Upload, message } from "antd";
+import { UploadOutlined, InboxOutlined } from "@ant-design/icons";
 import ImgCrop from "antd-img-crop";
 import "./style.css";
 import axios from "axios";
 type SizeType = Parameters<typeof Form>[0]["size"];
 
-const EditarPregunta = () => {
+const InsertarPatronus = () => {
   const [componentSize, setComponentSize] = useState<SizeType | "default">(
     "default"
   );
   const onFormLayoutChange = ({ size }: { size: SizeType }) => {
     setComponentSize(size);
   };
-
-  const listaPreguntas = [] as any;
-
-  const [idActualizar, setIdActualizar] = useState("");
-
-  const [numPreg, setNumPreg] = useState(0);
-  // const [listaPreguntas, setListaPreguntas] = useState<any>([]);
 
   const [respuesta1, setRespuesta1] = useState("");
 
@@ -52,23 +45,6 @@ const EditarPregunta = () => {
     setFileList4(newFileList);
   };
 
-  const [datosMenu, setDatosMenu] = useState<any>([]);
-
-  let menu = <Menu>{datosMenu}</Menu>;
-
-  function hacerMenu(listaPre) {
-    var menus: any[] = [];
-    listaPre[0].map((parametro, index) => {
-      menus.push(
-        <Menu.Item key={index} onClick={(dato) => escribirInputs(dato.key)}>
-          {parametro["pregunta"]}
-        </Menu.Item>
-      );
-    });
-    setDatosMenu(menus);
-    menu = <Menu>{menus}</Menu>;
-  }
-
   const onPreview = async (file) => {
     let src = file.url;
     if (!src) {
@@ -84,15 +60,14 @@ const EditarPregunta = () => {
     //imgWindow.document.write(image.outerHTML);
   };
 
-  async function GuardarPregunta() {
+  function GuardarPregunta() {
     console.log(fileList);
-    await axios({
+    axios({
       method: "POST",
-      url: "http://localhost:8080/editarTest",
+      url: "http://localhost:8080/añadirPatronus",
       data: {
-        _id: idActualizar,
         pregunta: pregunta,
-        numPregunta: numPreg,
+        numPregunta: 9,
         respuestas: [
           {
             numRespuesta: 1,
@@ -122,45 +97,7 @@ const EditarPregunta = () => {
       },
       headers: { "Access-Control-Allow-Origin": "*" },
     });
-    conseguirPreguntas();
   }
-
-  async function conseguirPreguntas() {
-    let lista = [] as any;
-    await axios({
-      method: "GET",
-      url: "http://localhost:8080/getPreguntasRespuestas",
-      headers: { "Access-Control-Allow-Origin": "*" },
-    }).then((response: any) => {
-      listaPreguntas.push(response.data);
-      lista.push(response.data);
-      console.log(listaPreguntas);
-    });
-    hacerMenu(lista);
-  }
-
-  function escribirInputs(numero) {
-    var lista = listaPreguntas[0][numero];
-    setIdActualizar(lista["_id"]);
-    setNumPreg(lista["numPregunta"]);
-    setPregunta(lista["pregunta"]);
-
-    setRespuesta1(lista["respuestas"][0]["respuesta"]);
-    setFileList(lista["respuestas"][0]["imagen"]);
-
-    setRespuesta2(lista["respuestas"][1]["respuesta"]);
-    setFileList2(lista["respuestas"][1]["imagen"]);
-
-    setRespuesta3(lista["respuestas"][2]["respuesta"]);
-    setFileList3(lista["respuestas"][2]["imagen"]);
-
-    setRespuesta4(lista["respuestas"][3]["respuesta"]);
-    setFileList4(lista["respuestas"][3]["imagen"]);
-  }
-
-  useEffect(() => {
-    conseguirPreguntas();
-  }, []);
 
   return (
     <Form
@@ -171,35 +108,11 @@ const EditarPregunta = () => {
       onValuesChange={onFormLayoutChange}
       size={componentSize as SizeType}
     >
-      {/* <Dropdown overlay={menu} trigger={["click"]}>
-        <a
-          className="ant-dropdown-link"
-          onClick={(e) => {
-            e.preventDefault();
-          }}
-        >
-          Preguntas
-        </a>
-      </Dropdown> */}
-
-      <Dropdown overlay={menu} trigger={["click"]}>
-        <Button>
-          Preguntas <DownOutlined />
-        </Button>
-      </Dropdown>
-
       <Form.Item label="Pregunta: ">
-        <Input
-          value={pregunta}
-          onChange={(valor) => setPregunta(valor.target.value)}
-        />
+        <Input onChange={(valor) => setPregunta(valor.target.value)} />
       </Form.Item>
       <Form.Item label="Respuesta 1:">
-        <Input
-          value={respuesta1}
-          id="respuesta"
-          onChange={(valor) => setRespuesta1(valor.target.value)}
-        />
+        <Input onChange={(valor) => setRespuesta1(valor.target.value)} />
       </Form.Item>
       <div className="imageUplo">
         <ImgCrop rotate>
@@ -215,11 +128,7 @@ const EditarPregunta = () => {
         </ImgCrop>
       </div>
       <Form.Item label="Respuesta 2:">
-        <Input
-          value={respuesta2}
-          id="respuesta2"
-          onChange={(valor) => setRespuesta2(valor.target.value)}
-        />
+        <Input onChange={(valor) => setRespuesta2(valor.target.value)} />
       </Form.Item>
       <div className="imageUplo">
         <ImgCrop rotate>
@@ -236,11 +145,7 @@ const EditarPregunta = () => {
         </ImgCrop>
       </div>
       <Form.Item label="Respuesta 3:">
-        <Input
-          value={respuesta3}
-          id="respuesta3"
-          onChange={(valor) => setRespuesta3(valor.target.value)}
-        />
+        <Input onChange={(valor) => setRespuesta3(valor.target.value)} />
       </Form.Item>
       <div className="imageUplo">
         <ImgCrop rotate>
@@ -257,11 +162,7 @@ const EditarPregunta = () => {
         </ImgCrop>
       </div>
       <Form.Item label="Respuesta 4:">
-        <Input
-          value={respuesta4}
-          id="respuesta4"
-          onChange={(valor) => setRespuesta4(valor.target.value)}
-        />
+        <Input onChange={(valor) => setRespuesta4(valor.target.value)} />
       </Form.Item>
       <div className="imageUplo">
         <ImgCrop rotate>
@@ -290,4 +191,4 @@ const EditarPregunta = () => {
   );
 };
 
-export default EditarPregunta;
+export default InsertarPatronus;
