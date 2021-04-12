@@ -74,6 +74,7 @@ const EditarPregunta = () => {
     if (!src) {
       src = await new Promise((resolve) => {
         const reader = new FileReader();
+        console.log(file);
         reader.readAsDataURL(file.originFileObj);
         reader.onload = () => resolve(reader.result);
       });
@@ -81,7 +82,7 @@ const EditarPregunta = () => {
     const image = new Image();
     image.src = src;
     const imgWindow = window.open(src);
-    //imgWindow.document.write(image.outerHTML);
+    imgWindow?.document.write(image.outerHTML);
   };
 
   async function GuardarPregunta() {

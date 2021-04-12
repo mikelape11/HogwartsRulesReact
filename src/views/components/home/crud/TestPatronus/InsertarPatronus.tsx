@@ -57,7 +57,7 @@ const InsertarPatronus = () => {
     const image = new Image();
     image.src = src;
     const imgWindow = window.open(src);
-    //imgWindow.document.write(image.outerHTML);
+    imgWindow?.document.write(image.outerHTML);
   };
 
   function GuardarPregunta() {
