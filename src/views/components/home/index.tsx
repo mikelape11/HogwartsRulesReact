@@ -12,7 +12,6 @@ import {
   UserOutlined,
   FileAddOutlined,
   FileExcelOutlined,
-  UserAddOutlined,
   UserDeleteOutlined,
   UserSwitchOutlined,
   EuroOutlined,
@@ -34,6 +33,9 @@ import InsertarVarita from "./crud/TestVarita/InsertarVarita";
 import EliminarPatronus from "./crud/TestPatronus/EliminarPatronus";
 import EditarPatronus from "./crud/TestPatronus/EditarPatronus";
 import InsertarPatronus from "./crud/TestPatronus/InsertarPatronus";
+import InsertarProductos from "./crud/Productos/InsertarProductos";
+import EditarProductos from "./crud/Productos/EditarProductos";
+import EliminarProductos from "./crud/Productos/EliminarProductos";
 //funcion que conecte con la api
 
 const Home = () => {
@@ -201,6 +203,9 @@ const Home = () => {
           >
             {valorMenu == 5 ? <EditarUsuario></EditarUsuario> : ""}
             {valorMenu == 6 ? <EliminarUsuario></EliminarUsuario> : ""}
+            {valorMenu === 7 ? <InsertarProductos></InsertarProductos> : ""}
+            {valorMenu === 8 ? <EditarProductos></EditarProductos> : ""}
+            {valorMenu === 9 ? <EliminarProductos></EliminarProductos> : ""}
             {valorMenu == 10 ? <InsertarPregunta></InsertarPregunta> : ""}
             {valorMenu == 11 ? <EditarPregunta></EditarPregunta> : ""}
             {valorMenu == 12 ? <EliminarPregunta></EliminarPregunta> : ""}
