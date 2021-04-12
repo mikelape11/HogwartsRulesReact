@@ -4,6 +4,7 @@ import { UploadOutlined, InboxOutlined } from "@ant-design/icons";
 import ImgCrop from "antd-img-crop";
 import "./style.css";
 import axios from "axios";
+import { PetsOutlined } from "@material-ui/icons";
 type SizeType = Parameters<typeof Form>[0]["size"];
 
 const InsertarProductos = () => {
@@ -18,14 +19,22 @@ const InsertarProductos = () => {
   const [precio,setPrecio]=useState(0);
   const [casa,setCasa]= useState("");
   const [tipo,setTipo]= useState("");
+  const [peso,setPeso]= useState(0);
+  const [fileList, setFileList] = useState<any>([]);
+  const onChange = ({ fileList: newFileList }) => {
+    setFileList(newFileList);
+  };
   function onChangeCantidad(value) {
     setCantidad(value);
   }
   function onChangePrecio(value) {
     setPrecio(value);
-  }  
-  function GuardarPregunta() {
-    axios({
+  } 
+  function onChangePeso(value) {
+    setPeso(value);
+  }   
+  async function GuardarPregunta() {
+    await axios({
       method: "POST",
       url: "http://localhost:8080/addProduct",
       data: {
@@ -33,7 +42,9 @@ const InsertarProductos = () => {
         cantidad: cantidad,
         precio : precio,
         casa : casa,
-        tipo: tipo    
+        tipo: tipo,
+        peso: peso,
+        foto: fileList
       },
     });
     setNombre("");
@@ -41,7 +52,23 @@ const InsertarProductos = () => {
     setPrecio(0);
     setCasa("");
     setTipo("");
+    setPeso(0);
+    setFileList([]);
   }
+  const onPreview = async (file) => {
+    let src = file.url;
+    if (!src) {
+      src = await new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file.originFileObj);
+        reader.onload = () => resolve(reader.result);
+      });
+    }
+    const image = new Image();
+    image.src = src;
+    const imgWindow = window.open(src);
+    imgWindow?.document.write(image.outerHTML);
+  };
 
   return (
     <Form
@@ -67,6 +94,23 @@ const InsertarProductos = () => {
       <Form.Item label="Tipo: ">
         <Input onChange={(valor) => setTipo(valor.target.value)} value={tipo}/>
       </Form.Item>
+      <Form.Item label="Peso: ">
+        <InputNumber min={1} max={100000} onChange={onChangePeso} value={peso}/>
+      </Form.Item>
+      <div className="imageUplo">
+        <ImgCrop rotate>
+          <Upload
+            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+            listType="picture-card"
+            fileList={fileList}
+            onChange={(imagen) => onChange(imagen)}
+            onPreview={onPreview}
+            id="imagenUplo"
+          >
+            {fileList.length < 1 && "+ Upload"}
+          </Upload>
+        </ImgCrop>
+      </div>
     
       <div id="guardar">
         <Button
