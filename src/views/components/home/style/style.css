@@ -6,14 +6,29 @@
   background: rgba(255, 255, 255, 0.3);
 }
 
+.ant-layout{
+  background:#f0f2f5  ;
+}
+
+.ant-layout{
+  background: #686868;
+}
+
 .ant-row-rtl #components-layout-demo-top-side-2 .logo {
   float: right;
   margin: 16px 0 16px 24px;
 }
 
+.site-dark-layout-background {
+  background: #4A4747;
+  margin-top: 1%;
+  color:white;
+}
+
 .site-layout-background {
   background: #fff;
   margin-top: 1%;
+  color:black;
 }
 body {
   background-image: url("");
@@ -28,9 +43,17 @@ body {
   height: 90vh;
   margin-top: 1%;
 }
+
+.header-dark {
+  background-color: #4A4747;
+  height: 100px;
+  color: white;
+}
+
 .header {
   background-color: #fff;
   height: 100px;
+  color: black;
 }
 
 #icono {
@@ -57,4 +80,24 @@ body {
 }
 #darklight {
   margin-top: 105%;
+}
+
+.menuLight{
+  background: white;
+  color: black;
+}
+
+.menuDark{
+  background: #4A4747;
+  color: white;
+}
+
+.footer{
+  background: #f0f2f5;
+  color: black;
+}
+
+.footer-dark{
+  background: #686868;
+  color:white;
 }

@@ -3,6 +3,7 @@ import { useHistory } from "react-router";
 import { Button, Layout, Menu } from "antd";
 import IconButton from "@material-ui/core/IconButton";
 import ToggleOffIcon from "@material-ui/icons/ToggleOff";
+import ToggleOnIcon from "@material-ui/icons/ToggleOn"
 import {
   RollbackOutlined,
   SettingOutlined,
@@ -36,26 +37,29 @@ import InsertarPatronus from "./crud/TestPatronus/InsertarPatronus";
 import InsertarProductos from "./crud/Productos/InsertarProductos";
 import EditarProductos from "./crud/Productos/EditarProductos";
 import EliminarProductos from "./crud/Productos/EliminarProductos";
+import { Style } from "@material-ui/icons";
 //funcion que conecte con la api
 
 const Home = () => {
   const [valorMenu, setValorMenu] = useState(1);
   const { SubMenu } = Menu;
   const { Content, Sider, Header, Footer } = Layout;
+  const [modo,setModo] = useState("Blanco");
   let history = useHistory();
   return (
     <Layout>
-      <Header className="header">
+      <Header className={modo=="Blanco" ? "header":"header-dark"}>
         <div id="icono">
           <img width={350} src={Icon}></img>
         </div>
       </Header>
       <Layout>
-        <Sider width={200} className="site-layout-background">
+        <Sider width={200} className={modo=="Blanco" ? "site-layout-background":"site-dark-layout-background"}>
           <Menu
             mode="inline"
             defaultSelectedKeys={["1"]}
             defaultOpenKeys={["sub1"]}
+            className={modo=="Blanco" ? "menuLight":"menuDark"}
             style={{ height: "100%", borderRight: 0 }}
           >
             <SubMenu key="sub1" icon={<FileSyncOutlined />} title="Noticias">
@@ -193,7 +197,7 @@ const Home = () => {
         </Sider>
         <Layout style={{ padding: "0 24px 24px" }} className="content">
           <Content
-            className="site-layout-background"
+            className={modo=="Blanco" ? "site-layout-background":"site-dark-layout-background"}
             style={{
               padding: 24,
               margin: 0,
@@ -218,7 +222,7 @@ const Home = () => {
 
           </Content>
         </Layout>
-        <Footer className="footer">
+        <Footer className={modo=="Blanco" ? "footer":"footer-dark"}>
           <input
             accept="image/*"
             id="contained-button-file"
@@ -231,7 +235,7 @@ const Home = () => {
               <img src={Avatar} id="logo"></img>
             </IconButton>
           </label>
-          <h1 id="h1nombre">BelakoOMG</h1>
+          <h1 id="h1nombre">ChorizoOMG</h1>
           <br></br>
           <Button
             type="primary"
@@ -270,10 +274,21 @@ const Home = () => {
           </Button>
           <br></br>
           <br></br>
-          <div id="darklight">
+          <div id="darklight" onClick={()=>{
+            if(modo == "Blanco"){
+              setModo("Oscuro")
+              // Style();
+            }else{
+              setModo("Blanco")
+            }
+          }}>
             <h1>Modo Oscuro</h1>
-            <ToggleOffIcon></ToggleOffIcon>
-          </div>
+            {modo == "Blanco" ?
+              <ToggleOffIcon></ToggleOffIcon>
+              :
+              <ToggleOnIcon></ToggleOnIcon>
+            }
+            </div>
         </Footer>
       </Layout>
     </Layout>
