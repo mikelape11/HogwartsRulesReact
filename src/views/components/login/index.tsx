@@ -25,8 +25,6 @@ const AnimFeTurbulence = animated("feTurbulence");
 const AnimFeDisplacementMap = animated("feDisplacementMap");
 
 const Demo = () => {
-  //const opacity2 = useRef(new Animated.value(0.1)).current;
-  // const [setAuth] = useAuth();
   const [opacity, setOpacidad] = useState<number>(0);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -96,8 +94,6 @@ const Demo = () => {
   }, []);
 
   return (
-    /*<div className="logo"><img src={Logo3} alt="Girl in a jacket"></img></div>*/
-    // <div onClick={() => {if(!logueado){toggle(!open)}}} id="divClick"></div>
     <div>
       {/* //opacity */}
       {!logueado ? (

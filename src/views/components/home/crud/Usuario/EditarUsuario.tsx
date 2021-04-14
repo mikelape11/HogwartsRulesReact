@@ -29,6 +29,10 @@ const EditarUsuario = () => {
 
   const [avatar, setAvatar] = useState("");
 
+  const [varita, setVarita] = useState("");
+
+  const [patronus, setPatronus] = useState("");
+
   const [rol, setRol] = useState(0);
 
   const [datosMenu, setDatosMenu] = useState<any>([]);
@@ -64,6 +68,8 @@ const EditarUsuario = () => {
           email: email,
           casaHogwarts: casaHogwarts,
           avatar: avatar,
+          patronus: patronus,
+          varita: varita,
           rol: rol,
         },
         headers: { "Access-Control-Allow-Origin": "*" },
@@ -74,6 +80,7 @@ const EditarUsuario = () => {
     setRol(0);
     setEmail("");
     setPassword("");
+    conseguirUsuarios();
   }
 
   async function conseguirUsuarios() {
@@ -91,6 +98,7 @@ const EditarUsuario = () => {
   }
 
   function escribirInputs(numero) {
+    console.log(lista);
     var lista = listaUsuarios[0][numero];
     setIdActualizar(lista["_id"]);
     setUsuario(lista["usuario"]);
@@ -98,6 +106,8 @@ const EditarUsuario = () => {
     setEmail(lista["email"]);
     setCasaHowgarts(lista["casaHogwarts"]);
     setAvatar(lista["avatar"]);
+    setVarita(lista["varita"]);
+    setPatronus(lista["patronus"]);
     setRol(lista["rol"]);
   }
 
@@ -166,6 +176,22 @@ const EditarUsuario = () => {
           value={avatar}
           id="respuesta4"
           onChange={(valor) => setAvatar(valor.target.value)}
+        />
+      </Form.Item>
+
+      <Form.Item label="Varita:">
+        <Input
+          value={varita}
+          id="respuesta4"
+          onChange={(valor) => setVarita(valor.target.value)}
+        />
+      </Form.Item>
+
+      <Form.Item label="Patronus:">
+        <Input
+          value={patronus}
+          id="respuesta4"
+          onChange={(valor) => setPatronus(valor.target.value)}
         />
       </Form.Item>
 
