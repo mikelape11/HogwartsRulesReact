@@ -5,6 +5,8 @@
   height: 50;
   text-align: center;
   margin: auto;
+  position: relative;
+  /* float: right; */
 }
 
 #guardar {
