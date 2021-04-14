@@ -31,6 +31,7 @@ const EliminarUsuario = () => {
       menus.push(
         <Menu.Item
           key={index}
+          id="dropdown"
           onClick={(dato) => {
             setIdSeleccionada(parametro["_id"]);
             escribirInputs(dato.key);
@@ -51,14 +52,15 @@ const EliminarUsuario = () => {
 
   async function Eliminar() {
     console.log(idSeleccionada);
-    await axios({
-      method: "DELETE",
-      url: "http://localhost:8080/eliminarUsuario",
-      data: {
-        _id: idSeleccionada,
-      },
-      headers: { "Access-Control-Allow-Origin": "*" },
-    });
+    if (usuario != "")
+      await axios({
+        method: "DELETE",
+        url: "http://localhost:8080/eliminarUsuario",
+        data: {
+          _id: idSeleccionada,
+        },
+        headers: { "Access-Control-Allow-Origin": "*" },
+      });
     setUsuario("");
     conseguirPreguntas();
   }

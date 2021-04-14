@@ -97,6 +97,15 @@ const InsertarPregunta = () => {
       },
       headers: { "Access-Control-Allow-Origin": "*" },
     });
+    setFileList([]);
+    setFileList2([]);
+    setFileList3([]);
+    setFileList4([]);
+    setPregunta("");
+    setRespuesta1("");
+    setRespuesta2("");
+    setRespuesta3("");
+    setRespuesta4("");
   }
 
   return (
@@ -122,6 +131,7 @@ const InsertarPregunta = () => {
             fileList={fileList}
             onChange={onChange}
             onPreview={onPreview}
+            id="imagenUplo"
           >
             {fileList.length < 1 && "+ Upload"}
           </Upload>

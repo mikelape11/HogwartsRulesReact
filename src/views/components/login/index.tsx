@@ -2,13 +2,14 @@ import React, { useEffect, useRef, useState } from "react";
 import { useHistory } from "react-router";
 import ReactDOM from "react-dom";
 import { Form, Input, Button, Checkbox } from "antd";
-import "./style/style.css";
 import "antd/dist/antd.css";
 import Logo3 from "./media/Logo3.png";
 import axios from "axios";
 import { useSpring, animated } from "react-spring";
 import ruta from "./style/logoInicio";
 import useAuth from "../../hooks/useAuth";
+import { colors } from "@material-ui/core";
+import "./style/style.css";
 
 const delay = require("delay");
 //funcion que conecte con la api
@@ -30,6 +31,7 @@ const Demo = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [logueado, setLogueado] = useState(false);
+  const [errorLogin, setErrorLogin] = useState(false);
   const [open, toggle] = useState(false);
   const { freq, scale, transform } = useSpring({
     reverse: open,
@@ -47,7 +49,7 @@ const Demo = () => {
   function comprobarLogin() {
     axios({
       method: "POST",
-      url: "http://localhost:8080/login",
+      url: "http://localhost:8080/loginWeb",
       data: {
         usuario: username,
         password: password,
@@ -56,7 +58,10 @@ const Demo = () => {
     }).then((response: any) => {
       // setAuth(response.data);
       if (response.data == true) {
+        setErrorLogin(false);
         history.push("/home");
+      } else {
+        setErrorLogin(true);
       }
     });
   }
@@ -74,6 +79,10 @@ const Demo = () => {
   }
 
   async function opacidadFomu() {
+    var cols = document.querySelectorAll("form div div label");
+    for (let i = 0; i < cols.length; i++) {
+      cols[i].setAttribute("style", "color:white");
+    }
     for (let i = 0; i < 11; i++) {
       setOpacidad(i / 10);
       await delay(100);
@@ -149,6 +158,12 @@ const Demo = () => {
               onChange={(text) => setPassword(text.target.value)}
             />
           </Form.Item>
+
+          {errorLogin == true ? (
+            <p>Los valores introducidos no son correctos!</p>
+          ) : (
+            ""
+          )}
 
           <Form.Item {...tailLayout} name="remember" valuePropName="checked">
             <Checkbox>Remember me</Checkbox>

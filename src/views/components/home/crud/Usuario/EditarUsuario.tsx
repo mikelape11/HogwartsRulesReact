@@ -39,7 +39,11 @@ const EditarUsuario = () => {
     var menus: any[] = [];
     listaPre[0].map((parametro, index) => {
       menus.push(
-        <Menu.Item key={index} onClick={(dato) => escribirInputs(dato.key)}>
+        <Menu.Item
+          key={index}
+          id="dropdown"
+          onClick={(dato) => escribirInputs(dato.key)}
+        >
           {parametro["usuario"]}
         </Menu.Item>
       );
@@ -49,20 +53,21 @@ const EditarUsuario = () => {
   }
 
   async function GuardarUsuario() {
-    await axios({
-      method: "PUT",
-      url: "http://localhost:8080/actualizarUsuario",
-      data: {
-        _id: idActualizar,
-        usuario: usuario,
-        password: password,
-        email: email,
-        casaHogwarts: casaHogwarts,
-        avatar: avatar,
-        rol: rol,
-      },
-      headers: { "Access-Control-Allow-Origin": "*" },
-    });
+    if (idActualizar != "")
+      await axios({
+        method: "PUT",
+        url: "http://localhost:8080/actualizarUsuario",
+        data: {
+          _id: idActualizar,
+          usuario: usuario,
+          password: password,
+          email: email,
+          casaHogwarts: casaHogwarts,
+          avatar: avatar,
+          rol: rol,
+        },
+        headers: { "Access-Control-Allow-Origin": "*" },
+      });
     setUsuario("");
     setAvatar("");
     setCasaHowgarts("");

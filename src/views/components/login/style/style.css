@@ -63,3 +63,22 @@ html,
   opacity: 1;
   transition: opacity 200ms;
 }
+
+.ant-form-item-label > label {
+  color: white;
+  font-size: larger;
+}
+
+.ant-form-item-control-input-content span {
+  color: white;
+  font-size: larger;
+}
+
+.ant-btn-primary {
+  font-size: small;
+}
+
+p {
+  color: red;
+  font-size: 20px;
+}

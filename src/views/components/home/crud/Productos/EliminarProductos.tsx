@@ -31,6 +31,7 @@ const EliminarProductos = () => {
       menus.push(
         <Menu.Item
           key={index}
+          id="dropdown"
           onClick={(dato) => {
             setIdSeleccionada(parametro["_id"]);
             escribirInputs(dato.key);
@@ -51,14 +52,15 @@ const EliminarProductos = () => {
 
   async function Eliminar() {
     console.log(idSeleccionada);
-    await axios({
-      method: "DELETE",
-      url: "http://localhost:8080/eliminarTest",
-      data: {
-        _id: idSeleccionada,
-      },
-      headers: { "Access-Control-Allow-Origin": "*" },
-    });
+    if (pregunta != "")
+      await axios({
+        method: "DELETE",
+        url: "http://localhost:8080/eliminarTest",
+        data: {
+          _id: idSeleccionada,
+        },
+        headers: { "Access-Control-Allow-Origin": "*" },
+      });
     setPregunta("");
     conseguirPreguntas();
   }

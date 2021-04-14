@@ -1,0 +1,19 @@
+.imageUplo {
+  align-self: center;
+  justify-content: center;
+  width: 50;
+  height: 50;
+  text-align: center;
+  margin: auto;
+}
+
+#guardar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ant-form-item-label > label {
+  color: black;
+  font-size: larger;
+}

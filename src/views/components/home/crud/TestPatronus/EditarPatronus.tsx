@@ -60,7 +60,11 @@ const EditarPatronus = () => {
     var menus: any[] = [];
     listaPre[0].map((parametro, index) => {
       menus.push(
-        <Menu.Item key={index} onClick={(dato) => escribirInputs(dato.key)}>
+        <Menu.Item
+          key={index}
+          id="dropdown"
+          onClick={(dato) => escribirInputs(dato.key)}
+        >
           {parametro["pregunta"]}
         </Menu.Item>
       );
@@ -86,42 +90,54 @@ const EditarPatronus = () => {
 
   async function GuardarPregunta() {
     console.log(fileList);
-    await axios({
-      method: "POST",
-      url: "http://localhost:8080/editarPatronus",
-      data: {
-        _id: idActualizar,
-        pregunta: pregunta,
-        numPregunta: numPreg,
-        respuestas: [
-          {
-            numRespuesta: 1,
-            respuesta: respuesta1,
-            imagen: fileList,
-            puntos: "paco",
-          },
-          {
-            numRespuesta: 2,
-            respuesta: respuesta2,
-            imagen: fileList2,
-            puntos: "paco",
-          },
-          {
-            numRespuesta: 3,
-            respuesta: respuesta3,
-            imagen: fileList3,
-            puntos: "paco",
-          },
-          {
-            numRespuesta: 4,
-            respuesta: respuesta4,
-            imagen: fileList4,
-            puntos: "paco",
-          },
-        ],
-      },
-      headers: { "Access-Control-Allow-Origin": "*" },
-    });
+    if (idActualizar != "")
+      await axios({
+        method: "POST",
+        url: "http://localhost:8080/editarPatronus",
+        data: {
+          _id: idActualizar,
+          pregunta: pregunta,
+          numPregunta: numPreg,
+          respuestas: [
+            {
+              numRespuesta: 1,
+              respuesta: respuesta1,
+              imagen: fileList,
+              puntos: "paco",
+            },
+            {
+              numRespuesta: 2,
+              respuesta: respuesta2,
+              imagen: fileList2,
+              puntos: "paco",
+            },
+            {
+              numRespuesta: 3,
+              respuesta: respuesta3,
+              imagen: fileList3,
+              puntos: "paco",
+            },
+            {
+              numRespuesta: 4,
+              respuesta: respuesta4,
+              imagen: fileList4,
+              puntos: "paco",
+            },
+          ],
+        },
+        headers: { "Access-Control-Allow-Origin": "*" },
+      });
+    setFileList([]);
+    setFileList2([]);
+    setFileList3([]);
+    setFileList4([]);
+    setPregunta("");
+    setRespuesta1("");
+    setRespuesta2("");
+    setRespuesta3("");
+    setRespuesta4("");
+    setIdActualizar("");
+    setNumPreg(0);
     conseguirPreguntas();
   }
 
@@ -171,17 +187,6 @@ const EditarPatronus = () => {
       onValuesChange={onFormLayoutChange}
       size={componentSize as SizeType}
     >
-      {/* <Dropdown overlay={menu} trigger={["click"]}>
-        <a
-          className="ant-dropdown-link"
-          onClick={(e) => {
-            e.preventDefault();
-          }}
-        >
-          Preguntas
-        </a>
-      </Dropdown> */}
-
       <Dropdown overlay={menu} trigger={["click"]}>
         <Button>
           Preguntas <DownOutlined />
@@ -209,6 +214,7 @@ const EditarPatronus = () => {
             fileList={fileList}
             onChange={onChange}
             onPreview={onPreview}
+            id="imagenUplo"
           >
             {fileList.length < 1 && "+ Upload"}
           </Upload>
