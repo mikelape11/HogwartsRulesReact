@@ -14,12 +14,12 @@ const InsertarProductos = () => {
   const onFormLayoutChange = ({ size }: { size: SizeType }) => {
     setComponentSize(size);
   };
-  const [nombre,setNombre] = useState("");
-  const [cantidad,setCantidad] = useState(0);
-  const [precio,setPrecio]=useState(0);
-  const [casa,setCasa]= useState("");
-  const [tipo,setTipo]= useState("");
-  const [peso,setPeso]= useState(0);
+  const [nombre, setNombre] = useState("");
+  const [cantidad, setCantidad] = useState(0);
+  const [precio, setPrecio] = useState(0);
+  const [casa, setCasa] = useState("");
+  const [tipo, setTipo] = useState("");
+  const [descripcion, setDescripcion] = useState("");
   const [fileList, setFileList] = useState<any>([]);
   const onChange = ({ fileList: newFileList }) => {
     setFileList(newFileList);
@@ -29,10 +29,7 @@ const InsertarProductos = () => {
   }
   function onChangePrecio(value) {
     setPrecio(value);
-  } 
-  function onChangePeso(value) {
-    setPeso(value);
-  }   
+  }
   async function GuardarPregunta() {
     await axios({
       method: "POST",
@@ -40,11 +37,11 @@ const InsertarProductos = () => {
       data: {
         nombre: nombre,
         cantidad: cantidad,
-        precio : precio,
-        casa : casa,
+        precio: precio,
+        casa: casa,
         tipo: tipo,
-        peso: peso,
-        foto: fileList
+        descripcion: descripcion,
+        foto: fileList,
       },
     });
     setNombre("");
@@ -52,7 +49,7 @@ const InsertarProductos = () => {
     setPrecio(0);
     setCasa("");
     setTipo("");
-    setPeso(0);
+    setDescripcion("");
     setFileList([]);
   }
   const onPreview = async (file) => {
@@ -80,22 +77,38 @@ const InsertarProductos = () => {
       size={componentSize as SizeType}
     >
       <Form.Item label="Nombre: ">
-        <Input onChange={(valor) => setNombre(valor.target.value)} value={nombre}/>
+        <Input
+          onChange={(valor) => setNombre(valor.target.value)}
+          value={nombre}
+        />
       </Form.Item>
       <Form.Item label="Cantidad: ">
-        <InputNumber min={1} max={100000} onChange={onChangeCantidad} value={cantidad}/>
+        <InputNumber
+          min={1}
+          max={100000}
+          onChange={onChangeCantidad}
+          value={cantidad}
+        />
       </Form.Item>
       <Form.Item label="Precio: ">
-        <InputNumber min={1} max={100000} onChange={onChangePrecio} value={precio}/>
+        <InputNumber
+          min={1}
+          max={100000}
+          onChange={onChangePrecio}
+          value={precio}
+        />
       </Form.Item>
       <Form.Item label="Casa: ">
-        <Input onChange={(valor) => setCasa(valor.target.value)} value={casa}/>
+        <Input onChange={(valor) => setCasa(valor.target.value)} value={casa} />
       </Form.Item>
       <Form.Item label="Tipo: ">
-        <Input onChange={(valor) => setTipo(valor.target.value)} value={tipo}/>
+        <Input onChange={(valor) => setTipo(valor.target.value)} value={tipo} />
       </Form.Item>
-      <Form.Item label="Peso: ">
-        <InputNumber min={1} max={100000} onChange={onChangePeso} value={peso}/>
+      <Form.Item label="Descripcion: ">
+        <Input
+          onChange={(valor) => setDescripcion(valor.target.value)}
+          value={descripcion}
+        />
       </Form.Item>
       <div className="imageUplo">
         <ImgCrop rotate>
@@ -111,7 +124,7 @@ const InsertarProductos = () => {
           </Upload>
         </ImgCrop>
       </div>
-    
+
       <div id="guardar">
         <Button
           onClick={() => {
