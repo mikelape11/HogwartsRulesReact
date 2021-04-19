@@ -31,13 +31,12 @@ const EliminarProductos = () => {
       menus.push(
         <Menu.Item
           key={index}
-          id="dropdown"
           onClick={(dato) => {
             setIdSeleccionada(parametro["_id"]);
             escribirInputs(dato.key);
           }}
         >
-          {parametro["pregunta"]}
+          {parametro["nombre"]}
         </Menu.Item>
       );
     });
@@ -47,29 +46,28 @@ const EliminarProductos = () => {
 
   function escribirInputs(numero) {
     var lista = listaPreguntas[0][numero];
-    setPregunta(lista["pregunta"]);
+    setPregunta(lista["nombre"]);
   }
 
   async function Eliminar() {
     console.log(idSeleccionada);
-    if (pregunta != "")
-      await axios({
-        method: "DELETE",
-        url: "http://localhost:8080/eliminarTest",
-        data: {
-          _id: idSeleccionada,
-        },
-        headers: { "Access-Control-Allow-Origin": "*" },
-      });
+    await axios({
+      method: "DELETE",
+      url: "http://localhost:8080/eliminarProducts",
+      data: {
+        _id: idSeleccionada,
+      },
+      headers: { "Access-Control-Allow-Origin": "*" },
+    });
     setPregunta("");
-    conseguirPreguntas();
+    conseguirProductos();
   }
 
-  async function conseguirPreguntas() {
+  async function conseguirProductos() {
     let lista = [] as any;
     await axios({
       method: "GET",
-      url: "http://localhost:8080/getPreguntasRespuestas",
+      url: "http://localhost:8080/todosProductos",
       headers: { "Access-Control-Allow-Origin": "*" },
     }).then((response: any) => {
       listaPreguntas.push(response.data);
@@ -80,7 +78,7 @@ const EliminarProductos = () => {
   }
 
   useEffect(() => {
-    conseguirPreguntas();
+    conseguirProductos();
   }, []);
 
   return (
@@ -94,7 +92,7 @@ const EliminarProductos = () => {
     >
       <Dropdown overlay={menu} trigger={["click"]}>
         <Button>
-          Preguntas <DownOutlined />
+          Productos <DownOutlined />
         </Button>
       </Dropdown>
 

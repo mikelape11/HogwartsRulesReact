@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Form, Input, Button, Upload, message, Menu, Dropdown } from "antd";
+import { Form, Input, Button, Upload, message, Menu, Dropdown, InputNumber } from "antd";
 import { DownOutlined, UserOutlined } from "@ant-design/icons";
 import ImgCrop from "antd-img-crop";
 import "./style.css";
@@ -16,43 +16,25 @@ const EditarProductos = () => {
 
   const listaPreguntas = [] as any;
 
-  const [idActualizar, setIdActualizar] = useState("");
+  const [datosMenu, setDatosMenu] = useState<any>([]);
 
-  const [numPreg, setNumPreg] = useState(0);
-  // const [listaPreguntas, setListaPreguntas] = useState<any>([]);
+  const [nombre,setNombre] = useState("");
 
-  const [respuesta1, setRespuesta1] = useState("");
+  const [cantidad,setCantidad] = useState(0);
 
-  const [respuesta2, setRespuesta2] = useState("");
+  const [precio,setPrecio] = useState(0);
 
-  const [respuesta3, setRespuesta3] = useState("");
+  const [casa,setCasa] = useState("");
 
-  const [respuesta4, setRespuesta4] = useState("");
+  const [tipo,setTipo] = useState("");
 
-  const [pregunta, setPregunta] = useState("");
+  const [fileList, setFileList] = useState<any>([]); 
 
-  const [fileList, setFileList] = useState<any>([]);
-
-  const [fileList2, setFileList2] = useState<any>([]);
-
-  const [fileList3, setFileList3] = useState<any>([]);
-
-  const [fileList4, setFileList4] = useState<any>([]);
+  const [descripcion,setDescripcion] = useState("");
 
   const onChange = ({ fileList: newFileList }) => {
     setFileList(newFileList);
   };
-  const onChange2 = ({ fileList: newFileList }) => {
-    setFileList2(newFileList);
-  };
-  const onChange3 = ({ fileList: newFileList }) => {
-    setFileList3(newFileList);
-  };
-  const onChange4 = ({ fileList: newFileList }) => {
-    setFileList4(newFileList);
-  };
-
-  const [datosMenu, setDatosMenu] = useState<any>([]);
 
   let menu = <Menu>{datosMenu}</Menu>;
 
@@ -60,12 +42,8 @@ const EditarProductos = () => {
     var menus: any[] = [];
     listaPre[0].map((parametro, index) => {
       menus.push(
-        <Menu.Item
-          key={index}
-          id="dropdown"
-          onClick={(dato) => escribirInputs(dato.key)}
-        >
-          {parametro["pregunta"]}
+        <Menu.Item key={index} onClick={(dato) => escribirInputs(dato.key)}>
+          {parametro["nombre"]}
         </Menu.Item>
       );
     });
@@ -89,62 +67,33 @@ const EditarProductos = () => {
   };
 
   async function GuardarPregunta() {
-    console.log(fileList);
-    if (idActualizar != "")
-      await axios({
-        method: "POST",
-        url: "http://localhost:8080/editarTest",
-        data: {
-          _id: idActualizar,
-          pregunta: pregunta,
-          numPregunta: numPreg,
-          respuestas: [
-            {
-              numRespuesta: 1,
-              respuesta: respuesta1,
-              imagen: fileList,
-              puntos: "paco",
-            },
-            {
-              numRespuesta: 2,
-              respuesta: respuesta2,
-              imagen: fileList2,
-              puntos: "paco",
-            },
-            {
-              numRespuesta: 3,
-              respuesta: respuesta3,
-              imagen: fileList3,
-              puntos: "paco",
-            },
-            {
-              numRespuesta: 4,
-              respuesta: respuesta4,
-              imagen: fileList4,
-              puntos: "paco",
-            },
-          ],
-        },
-        headers: { "Access-Control-Allow-Origin": "*" },
-      });
+    await axios({
+      method: "POST",
+      url: "http://localhost:8080/editProducts",
+      data: {
+        nombre: nombre,
+        cantidad: cantidad,
+        precio: precio,
+        casa: casa,
+        tipo: tipo,
+        foto: fileList
+      },
+      headers: { "Access-Control-Allow-Origin": "*" },
+    });
+    setCantidad(0);
+    setCasa("");
     setFileList([]);
-    setFileList2([]);
-    setFileList3([]);
-    setFileList4([]);
-    setNumPreg(0);
-    setPregunta("");
-    setRespuesta1("");
-    setRespuesta2("");
-    setRespuesta3("");
-    setRespuesta4("");
-    setIdActualizar("");
+    setNombre("");
+    setPrecio(0);
+    setTipo("");
+    setDescripcion("");
   }
 
-  async function conseguirPreguntas() {
+  async function conseguirProductos() {
     let lista = [] as any;
     await axios({
       method: "GET",
-      url: "http://localhost:8080/getPreguntasRespuestas",
+      url: "http://localhost:8080/todosProductos",
       headers: { "Access-Control-Allow-Origin": "*" },
     }).then((response: any) => {
       listaPreguntas.push(response.data);
@@ -156,28 +105,26 @@ const EditarProductos = () => {
 
   function escribirInputs(numero) {
     var lista = listaPreguntas[0][numero];
-    setIdActualizar(lista["_id"]);
-    setNumPreg(lista["numPregunta"]);
-    setPregunta(lista["pregunta"]);
-
-    setRespuesta1(lista["respuestas"][0]["respuesta"]);
-    setFileList(lista["respuestas"][0]["imagen"]);
-
-    setRespuesta2(lista["respuestas"][1]["respuesta"]);
-    setFileList2(lista["respuestas"][1]["imagen"]);
-
-    setRespuesta3(lista["respuestas"][2]["respuesta"]);
-    setFileList3(lista["respuestas"][2]["imagen"]);
-
-    setRespuesta4(lista["respuestas"][3]["respuesta"]);
-    setFileList4(lista["respuestas"][3]["imagen"]);
+    setNombre(lista["nombre"]);
+    setCantidad(lista["cantidad"])
+    setPrecio(lista["precio"]);
+    setCasa(lista["casa"])
+    setTipo(lista["tipo"])
+    setDescripcion(lista["descripcion"])
+    setFileList(lista["foto"])
   }
-
+  function onChangeCantidad(value) {
+    setCantidad(value);
+  }
+  function onChangePrecio(value) {
+    setPrecio(value);
+  }  
   useEffect(() => {
-    conseguirPreguntas();
+    conseguirProductos();
   }, []);
 
   return (
+    
     <Form
       labelCol={{ span: 4 }}
       wrapperCol={{ span: 14 }}
@@ -186,35 +133,29 @@ const EditarProductos = () => {
       onValuesChange={onFormLayoutChange}
       size={componentSize as SizeType}
     >
-      {/* <Dropdown overlay={menu} trigger={["click"]}>
-        <a
-          className="ant-dropdown-link"
-          onClick={(e) => {
-            e.preventDefault();
-          }}
-        >
-          Preguntas
-        </a>
-      </Dropdown> */}
-
+      
       <Dropdown overlay={menu} trigger={["click"]}>
         <Button>
-          Preguntas <DownOutlined />
+          Productos <DownOutlined />
         </Button>
       </Dropdown>
-
-      <Form.Item label="Pregunta: ">
-        <Input
-          value={pregunta}
-          onChange={(valor) => setPregunta(valor.target.value)}
-        />
+      <Form.Item label="Nombre: ">
+        <Input onChange={(valor) => setNombre(valor.target.value)} value={nombre}/>
       </Form.Item>
-      <Form.Item label="Respuesta 1:">
-        <Input
-          value={respuesta1}
-          id="respuesta"
-          onChange={(valor) => setRespuesta1(valor.target.value)}
-        />
+      <Form.Item label="Cantidad: ">
+        <InputNumber min={1} max={100000} onChange={onChangeCantidad} value={cantidad}/>
+      </Form.Item>
+      <Form.Item label="Precio: ">
+        <InputNumber min={1} max={100000} onChange={onChangePrecio} value={precio}/>
+      </Form.Item>
+      <Form.Item label="Casa: ">
+        <Input onChange={(valor) => setCasa(valor.target.value)} value={casa}/>
+      </Form.Item>
+      <Form.Item label="Tipo: ">
+        <Input onChange={(valor) => setTipo(valor.target.value)} value={tipo}/>
+      </Form.Item>
+      <Form.Item label="Decripcion: ">
+        <Input onChange={(valor) => setDescripcion(valor.target.value)} value={descripcion}/>
       </Form.Item>
       <div className="imageUplo">
         <ImgCrop rotate>
@@ -230,69 +171,19 @@ const EditarProductos = () => {
           </Upload>
         </ImgCrop>
       </div>
-      <Form.Item label="Respuesta 2:">
-        <Input
-          value={respuesta2}
-          id="respuesta2"
-          onChange={(valor) => setRespuesta2(valor.target.value)}
-        />
-      </Form.Item>
-      <div className="imageUplo">
-        <ImgCrop rotate>
-          <Upload
-            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-            listType="picture-card"
-            fileList={fileList2}
-            onChange={(imagen) => onChange2(imagen)}
-            onPreview={onPreview}
-            id="imagenUplo"
-          >
-            {fileList2.length < 1 && "+ Upload"}
-          </Upload>
-        </ImgCrop>
-      </div>
-      <Form.Item label="Respuesta 3:">
-        <Input
-          value={respuesta3}
-          id="respuesta3"
-          onChange={(valor) => setRespuesta3(valor.target.value)}
-        />
-      </Form.Item>
-      <div className="imageUplo">
-        <ImgCrop rotate>
-          <Upload
-            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-            listType="picture-card"
-            fileList={fileList3}
-            onChange={(imagen) => onChange3(imagen)}
-            onPreview={onPreview}
-            id="imagenUplo"
-          >
-            {fileList3.length < 1 && "+ Upload"}
-          </Upload>
-        </ImgCrop>
-      </div>
-      <Form.Item label="Respuesta 4:">
-        <Input
-          value={respuesta4}
-          id="respuesta4"
-          onChange={(valor) => setRespuesta4(valor.target.value)}
-        />
-      </Form.Item>
-      <div className="imageUplo">
-        <ImgCrop rotate>
-          <Upload
-            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-            listType="picture-card"
-            fileList={fileList4}
-            onChange={(imagen) => onChange4(imagen)}
-            onPreview={onPreview}
-            id="imagenUplo"
-          >
-            {fileList4.length < 1 && "+ Upload"}
-          </Upload>
-        </ImgCrop>
-      </div>
+      {/* <Dropdown overlay={menu} trigger={["click"]}>
+        <a
+          className="ant-dropdown-link"
+          onClick={(e) => {
+            e.preventDefault();
+          }}
+        >
+          Preguntas
+        </a>
+      </Dropdown> */}
+
+
+    
       <div id="guardar">
         <Button
           onClick={() => {
