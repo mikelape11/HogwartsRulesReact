@@ -2,14 +2,16 @@ import React, { useEffect, useRef, useState } from "react";
 import { useHistory } from "react-router";
 import ReactDOM from "react-dom";
 import { Form, Input, Button, Checkbox } from "antd";
+
 import "antd/dist/antd.css";
+import "./style/style.css";
 import Logo3 from "./media/Logo3.png";
 import axios from "axios";
 import { useSpring, animated } from "react-spring";
 import ruta from "./style/logoInicio";
 import useAuth from "../../hooks/useAuth";
 import { colors } from "@material-ui/core";
-import "./style/style.css";
+
 
 const delay = require("delay");
 //funcion que conecte con la api
@@ -155,14 +157,14 @@ const Demo = () => {
             />
           </Form.Item>
 
-          {errorLogin == true ? (
+          {errorLogin === true ? (
             <p>Los valores introducidos no son correctos!</p>
           ) : (
             ""
           )}
 
           <Form.Item {...tailLayout} name="remember" valuePropName="checked">
-            <Checkbox>Remember me</Checkbox>
+            <Checkbox>Recordarme</Checkbox>
           </Form.Item>
 
           <Form.Item {...tailLayout}>
@@ -171,7 +173,7 @@ const Demo = () => {
               htmlType="submit"
               onClick={() => comprobarLogin()}
             >
-              Submit
+              Iniciar sesion
             </Button>
           </Form.Item>
         </Form>
