@@ -39,6 +39,9 @@ import EditarProductos from "./crud/Productos/EditarProductos";
 import EliminarProductos from "./crud/Productos/EliminarProductos";
 import { Style } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core";
+import InsertarRules from "./crud/Rules/InsertarRules";
+import EditarRules from "./crud/Rules/EditarRules";
+import EliminarRules from "./crud/Rules/EliminarRules";
 //funcion que conecte con la api
 
 const Home = () => {
@@ -146,35 +149,6 @@ const Home = () => {
             className={modo == "Blanco" ? "menuLight" : "menuDark"}
             style={{ height: "100%", borderRight: 0 }}
           >
-            <SubMenu key="sub1" icon={<FileSyncOutlined />} title="Noticias">
-              <Menu.Item
-                key="1"
-                onClick={() => setValorMenu(1)}
-                id="subMenu"
-                icon={<FileAddOutlined />}
-                className={modo == "Blanco" ? "subMenuLight" : "subMenuDark"}
-              >
-                Crear
-              </Menu.Item>
-              <Menu.Item
-                key="2"
-                onClick={() => setValorMenu(2)}
-                id="subMenu"
-                icon={<FileSyncOutlined />}
-                className={modo == "Blanco" ? "subMenuLight" : "subMenuDark"}
-              >
-                Editar
-              </Menu.Item>
-              <Menu.Item
-                key="3"
-                onClick={() => setValorMenu(3)}
-                id="subMenu"
-                icon={<FileExcelOutlined />}
-                className={modo == "Blanco" ? "subMenuLight" : "subMenuDark"}
-              >
-                Eliminar
-              </Menu.Item>
-            </SubMenu>
             <SubMenu key="sub2" icon={<UserOutlined />} title="Usuarios">
               <Menu.Item
                 key="5"
@@ -311,6 +285,35 @@ const Home = () => {
                 Eliminar
               </Menu.Item>
             </SubMenu>
+            <SubMenu key="sub7" icon={<EuroOutlined />} title="Rules">
+              <Menu.Item
+                key="19"
+                id="subMenu"
+                onClick={() => setValorMenu(19)}
+                icon={<PlusSquareOutlined />}
+                className={modo == "Blanco" ? "subMenuLight" : "subMenuDark"}
+              >
+                Crear
+              </Menu.Item>
+              <Menu.Item
+                key="20"
+                id="subMenu"
+                onClick={() => setValorMenu(20)}
+                icon={<QuestionCircleOutlined />}
+                className={modo == "Blanco" ? "subMenuLight" : "subMenuDark"}
+              >
+                Editar
+              </Menu.Item>
+              <Menu.Item
+                key="21"
+                id="subMenu"
+                onClick={() => setValorMenu(21)}
+                icon={<MinusSquareOutlined />}
+                className={modo == "Blanco" ? "subMenuLight" : "subMenuDark"}
+              >
+                Eliminar
+              </Menu.Item>
+            </SubMenu>
           </Menu>
         </Sider>
         <Layout style={{ padding: "0 24px 24px" }} className="content">
@@ -341,6 +344,9 @@ const Home = () => {
             {valorMenu == 16 ? <InsertarPatronus></InsertarPatronus> : ""}
             {valorMenu == 17 ? <EditarPatronus></EditarPatronus> : ""}
             {valorMenu == 18 ? <EliminarPatronus></EliminarPatronus> : ""}
+            {valorMenu == 19 ? <InsertarRules></InsertarRules> : ""}
+            {valorMenu == 20 ? <EditarRules></EditarRules> : ""}
+            {valorMenu == 21 ? <EliminarRules></EliminarRules> : ""}
           </Content>
         </Layout>
         <Footer className={modo == "Blanco" ? "footer" : "footer-dark"}>
