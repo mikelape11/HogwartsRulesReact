@@ -18,19 +18,20 @@ const EditarProductos = () => {
 
   const [datosMenu, setDatosMenu] = useState<any>([]);
 
-  const [nombre,setNombre] = useState("");
+  const [nombre, setNombre] = useState("");
 
-  const [cantidad,setCantidad] = useState(0);
+  const [cantidad, setCantidad] = useState(0);
 
-  const [precio,setPrecio] = useState(0);
+  const [precio, setPrecio] = useState(0);
 
-  const [casa,setCasa] = useState("");
+  const [casa, setCasa] = useState("");
 
-  const [tipo,setTipo] = useState("");
+  const [tipo, setTipo] = useState("");
 
-  const [fileList, setFileList] = useState<any>([]); 
+  const [fileList, setFileList] = useState<any>([]);
 
-  const [descripcion,setDescripcion] = useState("");
+  const [descripcion, setDescripcion] = useState("");
+  const [id, setId] = useState("");
 
   const onChange = ({ fileList: newFileList }) => {
     setFileList(newFileList);
@@ -71,6 +72,7 @@ const EditarProductos = () => {
       method: "POST",
       url: "http://localhost:8080/editProducts",
       data: {
+        _id: id,
         nombre: nombre,
         cantidad: cantidad,
         precio: precio,
@@ -105,6 +107,7 @@ const EditarProductos = () => {
 
   function escribirInputs(numero) {
     var lista = listaPreguntas[0][numero];
+    setId(lista["_id"]);
     setNombre(lista["nombre"]);
     setCantidad(lista["cantidad"])
     setPrecio(lista["precio"]);
@@ -118,13 +121,13 @@ const EditarProductos = () => {
   }
   function onChangePrecio(value) {
     setPrecio(value);
-  }  
+  }
   useEffect(() => {
     conseguirProductos();
   }, []);
 
   return (
-    
+
     <Form
       labelCol={{ span: 4 }}
       wrapperCol={{ span: 14 }}
@@ -133,29 +136,29 @@ const EditarProductos = () => {
       onValuesChange={onFormLayoutChange}
       size={componentSize as SizeType}
     >
-      
+
       <Dropdown overlay={menu} trigger={["click"]}>
         <Button>
           Productos <DownOutlined />
         </Button>
       </Dropdown>
       <Form.Item label="Nombre: ">
-        <Input onChange={(valor) => setNombre(valor.target.value)} value={nombre}/>
+        <Input onChange={(valor) => setNombre(valor.target.value)} value={nombre} />
       </Form.Item>
       <Form.Item label="Cantidad: ">
-        <InputNumber min={1} max={100000} onChange={onChangeCantidad} value={cantidad}/>
+        <InputNumber min={1} max={100000} onChange={onChangeCantidad} value={cantidad} />
       </Form.Item>
       <Form.Item label="Precio: ">
-        <InputNumber min={1} max={100000} onChange={onChangePrecio} value={precio}/>
+        <InputNumber min={1} max={100000} onChange={onChangePrecio} value={precio} />
       </Form.Item>
       <Form.Item label="Casa: ">
-        <Input onChange={(valor) => setCasa(valor.target.value)} value={casa}/>
+        <Input onChange={(valor) => setCasa(valor.target.value)} value={casa} />
       </Form.Item>
       <Form.Item label="Tipo: ">
-        <Input onChange={(valor) => setTipo(valor.target.value)} value={tipo}/>
+        <Input onChange={(valor) => setTipo(valor.target.value)} value={tipo} />
       </Form.Item>
       <Form.Item label="Decripcion: ">
-        <Input onChange={(valor) => setDescripcion(valor.target.value)} value={descripcion}/>
+        <Input onChange={(valor) => setDescripcion(valor.target.value)} value={descripcion} />
       </Form.Item>
       <div className="imageUplo">
         <ImgCrop rotate>
@@ -183,7 +186,7 @@ const EditarProductos = () => {
       </Dropdown> */}
 
 
-    
+
       <div id="guardar">
         <Button
           onClick={() => {

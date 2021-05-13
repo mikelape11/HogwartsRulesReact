@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Form, Input, Button, Upload, message ,Select} from "antd";
+import { Form, Input, Button, Upload, message, Select } from "antd";
 import { UploadOutlined, InboxOutlined } from "@ant-design/icons";
 import ImgCrop from "antd-img-crop";
 import "./style.css";
 import axios from "axios";
-import {FileListin} from "../../../interface/interfarceFileList";
+import { FileListin } from "../../../interface/interfarceFileList";
 type SizeType = Parameters<typeof Form>[0]["size"];
 
 const InsertarRules = () => {
@@ -17,31 +17,48 @@ const InsertarRules = () => {
 
   const [usuario, setUsuario] = useState("");
 
-//   const [rol, setRol] = useState(0);
+  //   const [rol, setRol] = useState(0);
 
-  const [foto, setFoto] =useState([]);
+  const [foto, setFoto] = useState([]);
 
   const [rule, setRule] = useState("");
 
-  const [nombreUsuario, setNombresUsuario] : any[]= useState([]);
+  const [nombreUsuario, setNombresUsuario]: any[] = useState([]);
 
-  const [comentario,setComentario] = useState("");
+
+
+  const [comentario, setComentario] = useState("");
   const onChange = ({ fileList: newFileList }) => {
-    var imagen = newFileList[0];
+    var imagen = newFileList;
     console.log(imagen);
+    // for (let imag of Object.keys(imagen)) {
+    //   console.log(imag);
+    // }
+    // Array.from(imagen).forEach(file => setThumbUrl(file.thumbUrl));
     // var imagen2 = imagen.replace("{}","");
-    // var imagen2= JSON.stringify(imagen);
-    // console.log(imagen2)
+    var imagen2 = JSON.stringify(imagen);
+    console.log(imagen2);
+    var arrayimagen = imagen2.split(",");
+    var thumbUrl = "";
+    for (var i = 0; i < arrayimagen.length; i++) {
+      var arrayImagen2 = arrayimagen[i].split(":");
 
-    
+      if (arrayImagen2[0] == "thumbUrl") {
+        thumbUrl = arrayImagen2[1];
+      }
+    }
+    console.log(thumbUrl);
+
+
+
     //  var imageJson = JSON.parse(imagen);
     // console.log(imageJson);
     // Object.keys(subjects).map((item,i)=>{
     //     console.log(subjects[i].thumbUrl);
     // })
-//    imagen.map((e:any)=>{
-//         console.log(e);
-//    })
+    //    imagen.map((e:any)=>{
+    //         console.log(e);
+    //    })
     // var arrayList : any[]=[];
     // arrayList.push(imagen);
     //   console.log(arrayList[0]);
@@ -62,31 +79,31 @@ const InsertarRules = () => {
     imgWindow?.document.write(image.outerHTML);
   };
   const { Option } = Select;
-  useEffect(()=>{
-       var arrayPrueba :any[]= [];
+  useEffect(() => {
+    var arrayPrueba: any[] = [];
     axios({
-        method: "GET",
-        url : "http://localhost:8080/todos"
-    }).then((e:any)=>{
-        e.data.map((y:any)=>{
-            var usuario = y.usuario;
-            var option = <Option value={usuario}>{usuario}</Option>;
-            arrayPrueba.push(option)
-        })
-        setNombresUsuario(arrayPrueba);
+      method: "GET",
+      url: "http://localhost:8080/todos"
+    }).then((e: any) => {
+      e.data.map((y: any) => {
+        var usuario = y.usuario;
+        var option = <Option value={usuario}>{usuario}</Option>;
+        arrayPrueba.push(option)
+      })
+      setNombresUsuario(arrayPrueba);
     })
-  },[])
+  }, [])
   function GuardarRule() {
     axios({
       method: "POST",
       url: "http://localhost:8080/registrarRules",
       data: {
-        usuario:usuario,
+        usuario: usuario,
         // avatar: avatar,
         // rol: rol,
         rule: rule,
         foto: foto,
-        comentarios:comentario
+        comentarios: comentario
       },
       headers: { "Access-Control-Allow-Origin": "*" },
     });
@@ -94,7 +111,7 @@ const InsertarRules = () => {
     setUsuario("");
     setFoto([]);
     setRule("");
-    setComentario(""); 
+    setComentario("");
   }
 
   return (
@@ -107,31 +124,32 @@ const InsertarRules = () => {
       size={componentSize as SizeType}
     >
       <Form.Item label="Usuario: ">
-      <Select
-    showSearch
-    style={{ width: 200 }}
-    placeholder="Select a person"
-    onChange={(e:any)=>{
-        setUsuario(e.value)}}
-    >
-        {nombreUsuario}
-  </Select>
+        <Select
+          showSearch
+          style={{ width: 200 }}
+          placeholder="Select a person"
+          onChange={(e: any) => {
+            setUsuario(e.value)
+          }}
+        >
+          {nombreUsuario}
+        </Select>
       </Form.Item>
-      <Form.Item label="Avatar: ">
-      <div className="imageUplo">
-        <ImgCrop rotate>
-          <Upload
-            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-            listType="picture-card"
-            fileList={foto}
-            onChange={onChange}
-            onPreview={onPreview}
-            id="imagenUplo"
-          >
-            {foto.length < 1 && "+ Upload"}
-          </Upload>
-        </ImgCrop>
-      </div>
+      <Form.Item label="Foto: ">
+        <div className="imageUplo">
+          <ImgCrop rotate>
+            <Upload
+              action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+              listType="picture-card"
+              fileList={foto}
+              onChange={onChange}
+              onPreview={onPreview}
+              id="imagenUplo"
+            >
+              {foto.length < 1 && "+ Upload"}
+            </Upload>
+          </ImgCrop>
+        </div>
       </Form.Item>
       <Form.Item label="Rule:">
         <Input onChange={(valor) => setRule(valor.target.value)} />
@@ -142,7 +160,7 @@ const InsertarRules = () => {
       {/* <Form.Item label="Respuesta 1:">
         <Input onChange={(valor) => setRespuesta1(valor.target.value)} />
       </Form.Item> */}
-    
+
       <div id="guardar">
         <Button
           onClick={() => {
@@ -157,7 +175,4 @@ const InsertarRules = () => {
 };
 
 export default InsertarRules;
-function subjects(subjects: any) {
-    throw new Error("Function not implemented.");
-}
 

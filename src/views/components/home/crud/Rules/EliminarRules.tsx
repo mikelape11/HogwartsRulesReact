@@ -37,7 +37,7 @@ const EliminarRules = () => {
             escribirInputs(dato.key);
           }}
         >
-          {parametro["pregunta"]}
+          {parametro["rule"]}
         </Menu.Item>
       );
     });
@@ -47,15 +47,14 @@ const EliminarRules = () => {
 
   function escribirInputs(numero) {
     var lista = listaPreguntas[0][numero];
-    setPregunta(lista["pregunta"]);
+    setPregunta(lista["rule"]);
   }
 
   async function Eliminar() {
-    console.log(idSeleccionada);
     if (pregunta != "")
       await axios({
         method: "DELETE",
-        url: "http://localhost:8080/eliminarTest",
+        url: "http://localhost:8080/eliminarRules",
         data: {
           _id: idSeleccionada,
         },
@@ -69,12 +68,11 @@ const EliminarRules = () => {
     let lista = [] as any;
     await axios({
       method: "GET",
-      url: "http://localhost:8080/getPreguntasRespuestas",
+      url: "http://localhost:8080/todosRules",
       headers: { "Access-Control-Allow-Origin": "*" },
     }).then((response: any) => {
       listaPreguntas.push(response.data);
       lista.push(response.data);
-      console.log(listaPreguntas);
     });
     hacerMenu(lista);
   }
@@ -94,7 +92,7 @@ const EliminarRules = () => {
     >
       <Dropdown overlay={menu} trigger={["click"]}>
         <Button>
-          Preguntas <DownOutlined />
+          Rules <DownOutlined />
         </Button>
       </Dropdown>
 
