@@ -11,7 +11,8 @@ import { useSpring, animated } from "react-spring";
 import ruta from "./style/logoInicio";
 import useAuth from "../../hooks/useAuth";
 import { colors } from "@material-ui/core";
-
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import Logo2 from "./img/Logo2.png";
 
 const delay = require("delay");
 //funcion que conecte con la api
@@ -102,7 +103,6 @@ const Demo = () => {
         <animated.svg
           style={{ transform }}
           viewBox="0 0 1278 446"
-          id="logo"
           className="logo"
         >
           <defs>
@@ -129,54 +129,23 @@ const Demo = () => {
           </g>
         </animated.svg>
       ) : (
-        <Form
-          {...layout}
-          name="basic"
-          initialValues={{ remember: true }}
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
-          id="formulario"
-          style={{ opacity: opacity }}
-          //className={opacity}
-        >
-          <Form.Item
-            label="Username"
-            name="username"
-            rules={[{ required: true, message: "Please input your username!" }]}
-          >
-            <Input onChange={(text) => setUsername(text.target.value)} />
-          </Form.Item>
+        <div id="contenedorForm" >
+          <img src={Logo2} alt="" id="imagen"></img>
+          <div className="formulario">
+            <UserOutlined style={{ fontSize: "25px", display: "inline", marginLeft: "13%", marginTop: "6.7%", padding: 0, position: "absolute", color: "#B46B1F" }}></UserOutlined>
+            <input onChange={(text) => setUsername(text.target.value)} className="inputLogin" placeholder="Usuario" type="text">
+            </input>
+            <br></br>
+            <LockOutlined style={{ fontSize: "25px", display: "inline", marginLeft: "13%", marginTop: "6.7%", padding: 0, position: "absolute", color: "#B46B1F" }}></LockOutlined>
+            <input onChange={(text) => setPassword(text.target.value)} className="inputLogin" placeholder="Contraseña" type="password">
+            </input>
+            {errorLogin ? <p className="error">El usuario y la contraseña no coinciden</p> : ""}
+            <button onClick={() => comprobarLogin()} className="inputButton" >
+              LOGIN
+            </button>
+          </div>
+        </div>
 
-          <Form.Item
-            label="Password"
-            name="password"
-            rules={[{ required: true, message: "Please input your password!" }]}
-          >
-            <Input.Password
-              onChange={(text) => setPassword(text.target.value)}
-            />
-          </Form.Item>
-
-          {errorLogin === true ? (
-            <p>Los valores introducidos no son correctos!</p>
-          ) : (
-            ""
-          )}
-
-          <Form.Item {...tailLayout} name="remember" valuePropName="checked">
-            <Checkbox>Recordarme</Checkbox>
-          </Form.Item>
-
-          <Form.Item {...tailLayout}>
-            <Button
-              type="primary"
-              htmlType="submit"
-              onClick={() => comprobarLogin()}
-            >
-              Iniciar sesion
-            </Button>
-          </Form.Item>
-        </Form>
       )}
     </div>
   );

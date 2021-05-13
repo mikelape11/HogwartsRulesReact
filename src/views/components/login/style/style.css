@@ -1,12 +1,4 @@
-.logo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* background-image: url("../media/fondoAzul.jpg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover; */
-}
+
 
 html {
   box-sizing: border-box;
@@ -50,11 +42,7 @@ html,
   margin-left: 35%;
 }
 
-.logo {
-  width: 50%;
-  height: 50%;
-  margin-left: 35%;
-}
+
 
 .my-node {
   opacity: 0;
@@ -148,4 +136,229 @@ p {
 .ant-menu-item subMenuLight ant-menu-item-selected::after{
   border-right: 3px solid red;
 }
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-image: url("../media/fondoAzul.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover; */
+}
 
+html {
+  box-sizing: border-box;
+  
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+  font-family:Arial ;
+}
+
+
+body {
+  background-color: #16181d;
+}
+
+body,
+html,
+#root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  
+}
+
+#root > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  background-position: center;
+  background-repeat:unset;
+  background-size:cover;
+  
+}
+
+#root > div > svg {
+  width: 1400px;
+  height: 1000px;
+  margin-left: 35%;
+}
+
+.logo {
+  width: 50%;
+  height: 50%;
+  margin-left: 35%;
+}
+
+.my-node {
+  opacity: 0;
+}
+.my-node-enter {
+  opacity: 1;
+  transition: opacity 200ms;
+}
+
+.ant-form-item-label > label {
+  color: white;
+  font-size: larger;
+  
+}
+
+.ant-form-item-control-input-content span {
+  color: white;
+  font-size: larger;    
+}
+
+.ant-form {    
+  padding-right: 70px;    
+}
+
+.ant-btn-primary {
+  font-size: small;
+  background: rgb(3, 122, 190);
+  border : 1px solid white;
+  box-shadow: 1px 1px black;
+  margin-left: 10px;
+  border-radius: 20px;
+}
+.ant-btn-primary:hover {
+  font-size: small;
+  background: black;
+  border : 1px solid white;
+}
+
+p {
+  color: red;
+  font-size: 20px;
+}
+.ant-input{
+  border-radius: 20px;
+}
+
+.ant-input-password{
+  border-radius: 20px;
+}
+
+/* .ant-input:hover{
+  border: 1px solid blue;
+  box-shadow: 2px 2px black;
+} */
+
+.inputUsername:hover{
+
+  box-shadow: 2px 2px black;
+}
+
+.ant-input-password:hover{
+  border: 1px solid blue;
+  box-shadow: 2px 2px black;
+}
+
+.ant-menu:hover{
+  color: red;
+}
+.ant-menu:focus{
+  border-right: 3px solid red;
+}
+.ant-menu-submenu-title:hover {
+  color:red;
+}
+.ant-menu-submenu-arrow::before, .ant-menu-submenu-arrow::after {
+  color:red;
+}
+.ant-menu-submenu-title::after {
+  border-right: 3px solid red;
+}
+.ant-menu-item subMenuLight ant-menu-item-selected::after{
+  border-right: 3px solid red;
+}
+
+#contenedorForm{
+  width: 30%;
+  height: 60vh;
+  background: transparent;
+  align-items: center;
+  align-self: center;
+  
+  border-radius: 15px;   
+    
+}
+
+.formulario{
+  display: block;
+  position: relative;
+}
+#imagen{
+  position: relative;
+  margin-left:16%;
+}
+.inputLogin{
+  margin-top: 5%;
+  padding-top: 5px;
+  margin-left: 21%;
+  padding-left: 2%;
+  width: 61%;
+  height: 5vh;
+  /* border-radius: 20px; */
+  font-size: 20px;
+  border:2px solid #B46B1F;
+  /* border: solid rgb(77, 77, 77) 5px 5px; */
+  border-radius: 10px;
+  padding-bottom: 0;
+  outline: none;
+  background: transparent;
+  color:white;
+}
+.inputLogin::placeholder{
+  color:#B46B1F;
+}
+
+.imagenLogin{
+  margin-left: 40%;
+  margin-top: 3%;
+}
+
+
+.inputButton{
+  font-size: 30px;
+  margin-top: 8%;
+  margin-left: 31%;
+  width: 40%;
+  height: 5vh;
+  background: #B46B1F;
+  color: white;
+  border-radius: 20px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.inputButton:focus{
+  background: rgb(41, 41, 41);
+}
+
+.inputButton:hover{
+  background: rgb(41, 41, 41);
+  box-shadow: black 2px 2px;
+}
+
+.titulo{
+  margin-left:43%;
+  margin-top:5%;
+}
+
+.error{
+  color: rgb(223, 52, 52);
+
+  margin-top: 5%;
+  margin-left: 20%;
+}
